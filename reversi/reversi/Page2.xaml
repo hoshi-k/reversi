@@ -1,4 +1,5 @@
 ﻿<Page x:Class="オセロ.Page2"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,134 +9,237 @@
       d:DesignHeight="1000" d:DesignWidth="1000"
       Title="Page2">
 
+    <!--<Window>-->
+    <!--<Window.Resources>
+        <ResourceDictionary>
+                <BitmapImage x:Key="ImageSource1" UriSource="D:\プログラミング練習\trunk\reversi\reversi\Images\Green.png" />
+        </ResourceDictionary>
+    </Window.Resources>-->
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Column="0"
-                Grid.Row="1"/>
+        <!--<Button Name ="button00" Margin="5" Grid.Column="0" Grid.Row="0">
+                <Image Source="{StaticResource ImageSource1}" VerticalAlignment="Stretch" />
+        </Button>-->
+        <Button Name ="button00" Margin="5" Grid.Column="0" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button01" Margin="5" Grid.Column="0" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button02" Margin="5" Grid.Column="0" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button03" Margin="5" Grid.Column="0" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button04" Margin="5" Grid.Column="0" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button05" Margin="5" Grid.Column="0" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button06" Margin="5" Grid.Column="0" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button07" Margin="5" Grid.Column="0" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button10" Margin="5" Grid.Column="1" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button11" Margin="5" Grid.Column="1" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button12" Margin="5" Grid.Column="1" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button13" Margin="5" Grid.Column="1" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button14" Margin="5" Grid.Column="1" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button15" Margin="5" Grid.Column="1" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button16" Margin="5" Grid.Column="1" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button17" Margin="5" Grid.Column="1" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="1"/>
-        
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="2"/>
-        
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="3"/>
+        <Button Name ="button20" Margin="5" Grid.Column="2" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button21" Margin="5" Grid.Column="2" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button22" Margin="5" Grid.Column="2" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button23" Margin="5" Grid.Column="2" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button24" Margin="5" Grid.Column="2" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button25" Margin="5" Grid.Column="2" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button26" Margin="5" Grid.Column="2" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button27" Margin="5" Grid.Column="2" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="4"/>
+        <Button Name ="button30" Margin="5" Grid.Column="3" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button31" Margin="5" Grid.Column="3" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button32" Margin="5" Grid.Column="3" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button33" Margin="5" Grid.Column="3" Grid.Row="3">
+            <Image Source="D:\プログラミング練習\trunk\reversi\reversi\Images\Black.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button34" Margin="5" Grid.Column="3" Grid.Row="4">
+            <Image Source="D:\プログラミング練習\trunk\reversi\reversi\Images\White.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button35" Margin="5" Grid.Column="3" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button36" Margin="5" Grid.Column="3" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button37" Margin="5" Grid.Column="3" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="5"/>
+        <Button Name ="button40" Margin="5" Grid.Column="4" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button41" Margin="5" Grid.Column="4" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button42" Margin="5" Grid.Column="4" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button43" Margin="5" Grid.Column="4" Grid.Row="3">
+            <Image Source="D:\プログラミング練習\trunk\reversi\reversi\Images\White.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button44" Margin="5" Grid.Column="4" Grid.Row="4">
+            <Image Source="D:\プログラミング練習\trunk\reversi\reversi\Images\Black.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button45" Margin="5" Grid.Column="4" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button46" Margin="5" Grid.Column="4" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button47" Margin="5" Grid.Column="4" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="6"/>
+        <Button Name ="button50" Margin="5" Grid.Column="5" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button51" Margin="5" Grid.Column="5" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button52" Margin="5" Grid.Column="5" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button53" Margin="5" Grid.Column="5" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button54" Margin="5" Grid.Column="5" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button55" Margin="5" Grid.Column="5" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button56" Margin="5" Grid.Column="5" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button57" Margin="5" Grid.Column="5" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="3"/>
+        <Button Name ="button60" Margin="5" Grid.Column="6" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button61" Margin="5" Grid.Column="6" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button62" Margin="5" Grid.Column="6" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button63" Margin="5" Grid.Column="6" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button64" Margin="5" Grid.Column="6" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button65" Margin="5" Grid.Column="6" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button66" Margin="5" Grid.Column="6" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button67" Margin="5" Grid.Column="6" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="1"
-                Grid.Column="3"/>
+        <Button Name ="button70" Margin="5" Grid.Column="7" Grid.Row="0">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button71" Margin="5" Grid.Column="7" Grid.Row="1">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button72" Margin="5" Grid.Column="7" Grid.Row="2">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button73" Margin="5" Grid.Column="7" Grid.Row="3">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button74" Margin="5" Grid.Column="7" Grid.Row="4">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button75" Margin="5" Grid.Column="7" Grid.Row="5">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button76" Margin="5" Grid.Column="7" Grid.Row="6">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button77" Margin="5" Grid.Column="7" Grid.Row="7">
+            <Image Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        <Button Content=""
-                Margin="5"
-                Grid.Row="2"
-                Grid.Column="0"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="2"
-                Grid.Column="1"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="2"
-                Grid.Column="2"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="2"
-                Grid.Column="3"/>
-
-        <Button Content=""
-                Margin="5"
-                Grid.Row="3"
-                Grid.Column="0"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="3"
-                Grid.Column="1"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="3"
-                Grid.Column="2"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="3"
-                Grid.Column="3"/>
-
-        <Button Content=""
-                Margin="5"
-                Grid.Row="4"
-                Grid.Column="0"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="4"
-                Grid.Column="1"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="4"
-                Grid.Column="2"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="4"
-                Grid.Column="3"/>
-
-        <Button Content=""
-                Margin="5"
-                Grid.Row="5"
-                Grid.Column="0"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="5"
-                Grid.Column="1"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="5"
-                Grid.Column="2"/>
-        <Button Content=""
-                Margin="5"
-                Grid.Row="5"
-                Grid.Column="3"/>
-
-    </Grid>
+        </Grid>
+    <!--</Window>-->
 </Page>

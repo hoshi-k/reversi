@@ -71,7 +71,7 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-     <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -85,11 +85,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page1.xaml.cs" >
+    <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Page2.xaml.cs" >
+    <Compile Include="Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -118,6 +118,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Black.png" />
+    <Resource Include="Images\Green.png" />
+    <Resource Include="Images\White.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

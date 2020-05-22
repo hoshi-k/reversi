@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Resources;
 
 namespace オセロ
 {
@@ -23,6 +24,8 @@ namespace オセロ
         public Page2()
         {
             InitializeComponent();
+            string black = "";
+            //button1.BackgroundColor = Color.Red;
         }
     }
 }
