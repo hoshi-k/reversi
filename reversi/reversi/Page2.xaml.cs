@@ -25,25 +25,34 @@ namespace オセロ
         ImageSource IMG_WHITE;
         ImageSource IMG_BLACK;
         bool firstPlayerTarn = true;
+        //int[] row0 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        //int[] row1 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        //int[] row2 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        //int[] row3 = { 0, 0, 0, 1, 2, 0, 0, 0 };
+        //int[] row4 = { 0, 0, 0, 2, 1, 0, 0, 0 };
+        //int[] row5 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        //int[] row6 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+        //int[] row7 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        int[] row0 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int[] row1 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row2 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row3 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row4 = { 0, 1, 1, 1, 3, 2, 1, 1, 1, 0 };
+        int[] row5 = { 0, 1, 1, 1, 2, 3, 1, 1, 1, 0 };
+        int[] row6 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row7 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row8 = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 };
+        int[] row9 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         public Page2()
         {
             InitializeComponent();
-            IMG_WHITE = btn43.Source;
-            IMG_BLACK = btn44.Source;
-            IMG_GREEN = btn00.Source;
-            btn01.Source = IMG_GREEN;
-            btn02.Source = IMG_GREEN;
-            //button1.BackgroundColor = Color.Red;
+            IMG_WHITE = btn44.Source;
+            IMG_BLACK = btn45.Source;
+            IMG_GREEN = btn11.Source;
+            ReflectOnBoard();
         }
-
-        //Image myImage3 = new Image();
-        //BitmapImage bi3 = new BitmapImage();
-        //bi3.BeginInit();
-        //bi3.UriSource = new Uri("smiley_stackpanel.PNG", UriKind.Relative);
-        //bi3.EndInit();
-        //myImage3.Stretch = Stretch.Fill;
-        //myImage3.Source = bi3;
 
         private void ChangeTarn()
         {
@@ -69,408 +78,228 @@ namespace オセロ
             }
         }
 
-        private void button00_Click(object sender, RoutedEventArgs e)
+        //置こうとしたマスがおける場所なのかチェックする関数
+        private void CheckTurnUpsideDown(int btnName2)
         {
-            //source.BeginInit();
-            //source.UriSource = new Uri("file://Images\\Black.png");
-            //source.EndInit();
-
-            //btn00.Source = IMG_BLACK;
-            //PutStone(btn00.Source);
-            if (btn00.Source == IMG_GREEN)
+            int tens = (btnName2 / 10) % 10; // (n % 100) / 10
+            int ones = btnName2 % 10;
+            int[] row = GetRow(tens);
+            if (row[ones] == 0)
             {
-                btn00.Source = GetPutStoneImage();
-                ChangeTarn();
+                //TODO:配列の範囲外になってしまいチェックできない　配列の端一列ずつ追加する？
             }
         }
 
-        private void button01_Click(object sender, RoutedEventArgs e)
+        private int[] GetRow(int row)
         {
-            //btn01.Source = IMG_WHITE;
-            //PutStone(btn01.Source);
-            if (btn01.Source == IMG_GREEN)
+            switch (row)
             {
-                btn01.Source = GetPutStoneImage();
-                ChangeTarn();
+                case 0:
+                    return row0;
+                case 1:
+                    return row1;
+                case 2:
+                    return row2;
+                case 3:
+                    return row3;
+                case 4:
+                    return row4;
+                case 5:
+                    return row5;
+                case 6:
+                    return row6;
+                case 7:
+                    return row7;
+                case 8:
+                    return row8;
+                case 9:
+                    return row9;
+                default:
+                    return row0;
             }
         }
 
-        private void button02_Click(object sender, RoutedEventArgs e)
+        //最後に盤面を画面に反映する関数
+        private void ReflectOnBoard()
         {
-            //btn02.Source = IMG_BLACK;
-            //PutStone(btn02.Source);
-            if (btn02.Source == IMG_GREEN)
+            for (int row = 0; row < 8; row++)
             {
-                btn02.Source = GetPutStoneImage();
+                int[] rowwww = GetRow(row);
+                for (int line = 0; line < 8; line++)
+                {
+                    string rowstr = row.ToString();
+                    string linestr = line.ToString();
+                    string aaa = rowstr + linestr;
+                    Image sorce = GetSorce(aaa);
+                    if (rowwww[line] == 1)
+                    {
+                        sorce.Source = IMG_GREEN;
+                    }
+                    if (rowwww[line] == 2)
+                    {
+                        sorce.Source = IMG_WHITE;
+                    }
+                    if (rowwww[line] == 3)
+                    {
+                        sorce.Source = IMG_BLACK;
+                    }
+                }
+            }
+        }
+
+        //マスのボタンを押したときに走る関数
+        private void buttonSquare_Click(object sender, RoutedEventArgs e)
+        {
+            Button srcButton = (Button)e.Source;
+            Image square = (Image)srcButton.Content;
+
+            string btnName = srcButton.Name;
+            int btnName2 = int.Parse(btnName.Replace("button", ""));
+            CheckTurnUpsideDown(btnName2);
+
+            if (square.Source == IMG_GREEN)
+            {
+                square.Source = GetPutStoneImage();
                 ChangeTarn();
             }
-            ChangeTarn();
+            ReflectOnBoard();
         }
 
-        private void button03_Click(object sender, RoutedEventArgs e)
+        private Image GetSorce(string aaa)
         {
-            btn03.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button04_Click(object sender, RoutedEventArgs e)
-        {
-            btn04.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button05_Click(object sender, RoutedEventArgs e)
-        {
-            btn05.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button06_Click(object sender, RoutedEventArgs e)
-        {
-            btn06.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button07_Click(object sender, RoutedEventArgs e)
-        {
-            btn07.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button10_Click(object sender, RoutedEventArgs e)
-        {
-            btn10.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button11_Click(object sender, RoutedEventArgs e)
-        {
-            btn11.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button12_Click(object sender, RoutedEventArgs e)
-        {
-            btn12.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button13_Click(object sender, RoutedEventArgs e)
-        {
-            btn13.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button14_Click(object sender, RoutedEventArgs e)
-        {
-            btn14.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button15_Click(object sender, RoutedEventArgs e)
-        {
-            btn15.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button16_Click(object sender, RoutedEventArgs e)
-        {
-            btn16.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button17_Click(object sender, RoutedEventArgs e)
-        {
-            btn17.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button20_Click(object sender, RoutedEventArgs e)
-        {
-            btn20.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button21_Click(object sender, RoutedEventArgs e)
-        {
-            btn21.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button22_Click(object sender, RoutedEventArgs e)
-        {
-            btn22.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button23_Click(object sender, RoutedEventArgs e)
-        {
-            btn23.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button24_Click(object sender, RoutedEventArgs e)
-        {
-            btn24.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button25_Click(object sender, RoutedEventArgs e)
-        {
-            btn25.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button26_Click(object sender, RoutedEventArgs e)
-        {
-            btn26.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button27_Click(object sender, RoutedEventArgs e)
-        {
-            btn27.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button30_Click(object sender, RoutedEventArgs e)
-        {
-            btn30.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button31_Click(object sender, RoutedEventArgs e)
-        {
-            btn31.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button32_Click(object sender, RoutedEventArgs e)
-        {
-            btn32.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button33_Click(object sender, RoutedEventArgs e)
-        {
-            btn33.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button34_Click(object sender, RoutedEventArgs e)
-        {
-            btn34.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button35_Click(object sender, RoutedEventArgs e)
-        {
-            btn35.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button36_Click(object sender, RoutedEventArgs e)
-        {
-            btn36.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button37_Click(object sender, RoutedEventArgs e)
-        {
-            btn37.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button40_Click(object sender, RoutedEventArgs e)
-        {
-            btn40.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button41_Click(object sender, RoutedEventArgs e)
-        {
-            btn41.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button42_Click(object sender, RoutedEventArgs e)
-        {
-            btn42.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button43_Click(object sender, RoutedEventArgs e)
-        {
-            btn43.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button44_Click(object sender, RoutedEventArgs e)
-        {
-            btn44.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button45_Click(object sender, RoutedEventArgs e)
-        {
-            btn45.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button46_Click(object sender, RoutedEventArgs e)
-        {
-            btn46.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button47_Click(object sender, RoutedEventArgs e)
-        {
-            btn47.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button50_Click(object sender, RoutedEventArgs e)
-        {
-            btn50.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button51_Click(object sender, RoutedEventArgs e)
-        {
-            btn51.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button52_Click(object sender, RoutedEventArgs e)
-        {
-            btn52.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button53_Click(object sender, RoutedEventArgs e)
-        {
-            btn53.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button54_Click(object sender, RoutedEventArgs e)
-        {
-            btn54.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button55_Click(object sender, RoutedEventArgs e)
-        {
-            btn55.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button56_Click(object sender, RoutedEventArgs e)
-        {
-            btn56.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button57_Click(object sender, RoutedEventArgs e)
-        {
-            btn57.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button60_Click(object sender, RoutedEventArgs e)
-        {
-            btn60.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button61_Click(object sender, RoutedEventArgs e)
-        {
-            btn61.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button62_Click(object sender, RoutedEventArgs e)
-        {
-            btn62.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button63_Click(object sender, RoutedEventArgs e)
-        {
-            btn63.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button64_Click(object sender, RoutedEventArgs e)
-        {
-            btn64.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button65_Click(object sender, RoutedEventArgs e)
-        {
-            btn65.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button66_Click(object sender, RoutedEventArgs e)
-        {
-            btn66.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button67_Click(object sender, RoutedEventArgs e)
-        {
-            btn67.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button70_Click(object sender, RoutedEventArgs e)
-        {
-            btn70.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button71_Click(object sender, RoutedEventArgs e)
-        {
-            btn71.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button72_Click(object sender, RoutedEventArgs e)
-        {
-            btn72.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button73_Click(object sender, RoutedEventArgs e)
-        {
-            btn73.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button74_Click(object sender, RoutedEventArgs e)
-        {
-            btn74.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button75_Click(object sender, RoutedEventArgs e)
-        {
-            btn75.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button76_Click(object sender, RoutedEventArgs e)
-        {
-            btn76.Source = GetPutStoneImage();
-            ChangeTarn();
-        }
-
-        private void button77_Click(object sender, RoutedEventArgs e)
-        {
-            btn77.Source = GetPutStoneImage();
-            ChangeTarn();
+            switch (aaa)
+            {
+                case "11":
+                    return btn11;
+                case "12":
+                    return btn12;
+                case "13":
+                    return btn13;
+                case "14":
+                    return btn14;
+                case "15":
+                    return btn15;
+                case "16":
+                    return btn16;
+                case "17":
+                    return btn17;
+                case "18":
+                    return btn18;
+                case "21":
+                    return btn21;
+                case "22":
+                    return btn22;
+                case "23":
+                    return btn23;
+                case "24":
+                    return btn24;
+                case "25":
+                    return btn25;
+                case "26":
+                    return btn26;
+                case "27":
+                    return btn27;
+                case "28":
+                    return btn28;
+                case "31":
+                    return btn31;
+                case "32":
+                    return btn32;
+                case "33":
+                    return btn33;
+                case "34":
+                    return btn34;
+                case "35":
+                    return btn35;
+                case "36":
+                    return btn36;
+                case "37":
+                    return btn37;
+                case "38":
+                    return btn38;
+                case "41":
+                    return btn41;
+                case "42":
+                    return btn42;
+                case "43":
+                    return btn43;
+                case "44":
+                    return btn44;
+                case "45":
+                    return btn45;
+                case "46":
+                    return btn46;
+                case "47":
+                    return btn47;
+                case "48":
+                    return btn48;
+                case "51":
+                    return btn51;
+                case "52":
+                    return btn52;
+                case "53":
+                    return btn53;
+                case "54":
+                    return btn54;
+                case "55":
+                    return btn55;
+                case "56":
+                    return btn56;
+                case "57":
+                    return btn57;
+                case "58":
+                    return btn58;
+                case "61":
+                    return btn61;
+                case "62":
+                    return btn62;
+                case "63":
+                    return btn63;
+                case "64":
+                    return btn64;
+                case "65":
+                    return btn65;
+                case "66":
+                    return btn66;
+                case "67":
+                    return btn67;
+                case "68":
+                    return btn68;
+                case "71":
+                    return btn71;
+                case "72":
+                    return btn72;
+                case "73":
+                    return btn73;
+                case "74":
+                    return btn74;
+                case "75":
+                    return btn75;
+                case "76":
+                    return btn76;
+                case "77":
+                    return btn77;
+                case "78":
+                    return btn78;
+                case "81":
+                    return btn81;
+                case "82":
+                    return btn82;
+                case "83":
+                    return btn83;
+                case "84":
+                    return btn84;
+                case "85":
+                    return btn85;
+                case "86":
+                    return btn86;
+                case "87":
+                    return btn87;
+                case "88":
+                    return btn88;
+                default:
+                    return btn11;
+            }
         }
     }
 }

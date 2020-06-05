@@ -38,218 +38,210 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <!--<Button Name ="button00" Margin="5" Grid.Column="0" Grid.Row="0" Click = "button00_Click">
-                <Image Source="{StaticResource ImageSource1}" VerticalAlignment="Stretch" />
-        </Button>-->
-        
-        <!-- 0列目　-->
-        <Button Name ="button00" Margin="5" Grid.Column="0" Grid.Row="0" Click = "button00_Click">
-            <Image Name ="btn00" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button01" Margin="5" Grid.Column="0" Grid.Row="1" Click = "button01_Click">
-            <Image  Name ="btn01" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button02" Margin="5" Grid.Column="0" Grid.Row="2" Click = "button02_Click">
-            <Image  Name ="btn02" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button03" Margin="5" Grid.Column="0" Grid.Row="3" Click = "button03_Click">
-            <Image Name ="btn03" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button04" Margin="5" Grid.Column="0" Grid.Row="4" Click = "button04_Click">
-            <Image Name ="btn04" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button05" Margin="5" Grid.Column="0" Grid.Row="5" Click = "button05_Click">
-            <Image Name ="btn05" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button06" Margin="5" Grid.Column="0" Grid.Row="6" Click = "button06_Click">
-            <Image Name ="btn06" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button07" Margin="5" Grid.Column="0" Grid.Row="7" Click = "button07_Click">
-            <Image Name ="btn07" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
+       
 
-        <!-- 1列目　-->
-        <Button Name ="button10" Margin="5" Grid.Column="1" Grid.Row="0" Click = "button10_Click">
-            <Image Name ="btn10" Source="Images\Green.png" VerticalAlignment="Stretch" />
-        </Button>
-        <Button Name ="button11" Margin="5" Grid.Column="1" Grid.Row="1" Click = "button11_Click">
+        <Button Name ="button11" Margin="5" Grid.Row="0" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn11" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button12" Margin="5" Grid.Column="1" Grid.Row="2" Click = "button12_Click">
+        <Button Name ="button12" Margin="5" Grid.Row="0" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn12" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button13" Margin="5" Grid.Column="1" Grid.Row="3" Click = "button13_Click">
+        <Button Name ="button13" Margin="5" Grid.Row="0" Grid.Column="2" Click = "buttonSquare_Click">
             <Image Name ="btn13" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button14" Margin="5" Grid.Column="1" Grid.Row="4" Click = "button14_Click">
+        <Button Name ="button14" Margin="5" Grid.Row="0" Grid.Column="3" Click = "buttonSquare_Click">
             <Image Name ="btn14" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button15" Margin="5" Grid.Column="1" Grid.Row="5" Click = "button15_Click">
+        <Button Name ="button15" Margin="5" Grid.Row="0" Grid.Column="4" Click = "buttonSquare_Click">
             <Image Name ="btn15" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button16" Margin="5" Grid.Column="1" Grid.Row="6" Click = "button16_Click">
+        <Button Name ="button16" Margin="5" Grid.Row="0" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn16" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button17" Margin="5" Grid.Column="1" Grid.Row="7" Click = "button17_Click">
+        <Button Name ="button17" Margin="5" Grid.Row="0" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn17" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-
-        <!-- 2列目　-->
-        <Button Name ="button20" Margin="5" Grid.Column="2" Grid.Row="0" Click = "button20_Click">
-            <Image Name ="btn20" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button18" Margin="5" Grid.Row="0" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn18" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button21" Margin="5" Grid.Column="2" Grid.Row="1" Click = "button21_Click">
+
+        <Button Name ="button21" Margin="5" Grid.Row="1" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn21" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button22" Margin="5" Grid.Column="2" Grid.Row="2" Click = "button22_Click">
+        <Button Name ="button22" Margin="5" Grid.Row="1" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn22" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button23" Margin="5" Grid.Column="2" Grid.Row="3" Click = "button23_Click">
+        <Button Name ="button23" Margin="5" Grid.Row="1" Grid.Column="2" Click = "buttonSquare_Click">
             <Image Name ="btn23" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button24" Margin="5" Grid.Column="2" Grid.Row="4" Click = "button24_Click">
+        <Button Name ="button24" Margin="5" Grid.Row="1" Grid.Column="3" Click = "buttonSquare_Click">
             <Image Name ="btn24" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button25" Margin="5" Grid.Column="2" Grid.Row="5" Click = "button25_Click">
+        <Button Name ="button25" Margin="5" Grid.Row="1" Grid.Column="4" Click = "buttonSquare_Click">
             <Image Name ="btn25" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button26" Margin="5" Grid.Column="2" Grid.Row="6" Click = "button26_Click">
+        <Button Name ="button26" Margin="5" Grid.Row="1" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn26" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button27" Margin="5" Grid.Column="2" Grid.Row="7" Click = "button27_Click">
+        <Button Name ="button27" Margin="5" Grid.Row="1" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn27" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-
-        <!--3列目-->
-        <Button Name ="button30" Margin="5" Grid.Column="3" Grid.Row="0" Click = "button30_Click">
-            <Image Name ="btn30" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button28" Margin="5" Grid.Row="1" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn28" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button31" Margin="5" Grid.Column="3" Grid.Row="1" Click = "button31_Click">
+
+        <Button Name ="button31" Margin="5" Grid.Row="2" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn31" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button32" Margin="5" Grid.Column="3" Grid.Row="2" Click = "button32_Click">
+        <Button Name ="button32" Margin="5" Grid.Row="2" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn32" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button33" Margin="5" Grid.Column="3" Grid.Row="3" Click = "button33_Click">
-            <Image Name ="btn33" Source="Images\Black.png" VerticalAlignment="Stretch" />
+        <Button Name ="button33" Margin="5" Grid.Row="2" Grid.Column="2" Click = "buttonSquare_Click">
+            <Image Name ="btn33" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button34" Margin="5" Grid.Column="3" Grid.Row="4" Click = "button34_Click">
-            <Image Name ="btn34" Source="Images\White.png" VerticalAlignment="Stretch" />
+        <Button Name ="button34" Margin="5" Grid.Row="2" Grid.Column="3" Click = "buttonSquare_Click">
+            <Image Name ="btn34" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button35" Margin="5" Grid.Column="3" Grid.Row="5" Click = "button35_Click">
+        <Button Name ="button35" Margin="5" Grid.Row="2" Grid.Column="4" Click = "buttonSquare_Click">
             <Image Name ="btn35" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button36" Margin="5" Grid.Column="3" Grid.Row="6" Click = "button36_Click">
+        <Button Name ="button36" Margin="5" Grid.Row="2" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn36" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button37" Margin="5" Grid.Column="3" Grid.Row="7" Click = "button37_Click">
+        <Button Name ="button37" Margin="5" Grid.Row="2" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn37" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        
-        <!--4列目-->
-        <Button Name ="button40" Margin="5" Grid.Column="4" Grid.Row="0" Click = "button40_Click">
-            <Image Name ="btn40" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button38" Margin="5" Grid.Row="2" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn38" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button41" Margin="5" Grid.Column="4" Grid.Row="1" Click = "button41_Click">
+
+        <Button Name ="button41" Margin="5" Grid.Row="3" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn41" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button42" Margin="5" Grid.Column="4" Grid.Row="2" Click = "button42_Click">
+        <Button Name ="button42" Margin="5" Grid.Row="3" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn42" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button43" Margin="5" Grid.Column="4" Grid.Row="3" Click = "button43_Click">
-            <Image Name ="btn43" Source="Images\White.png" VerticalAlignment="Stretch" />
+        <Button Name ="button43" Margin="5" Grid.Row="3" Grid.Column="2" Click = "buttonSquare_Click">
+            <Image Name ="btn43" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button44" Margin="5" Grid.Column="4" Grid.Row="4" Click = "button44_Click">
-            <Image Name ="btn44" Source="Images\Black.png" VerticalAlignment="Stretch" />
+        <Button Name ="button44" Margin="5" Grid.Row="3" Grid.Column="3" Click = "buttonSquare_Click">
+            <Image Name ="btn44" Source="Images\White.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button45" Margin="5" Grid.Column="4" Grid.Row="5" Click = "button45_Click">
-            <Image Name ="btn45" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button45" Margin="5" Grid.Row="3" Grid.Column="4" Click = "buttonSquare_Click">
+            <Image Name ="btn45" Source="Images\Black.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button46" Margin="5" Grid.Column="4" Grid.Row="6" Click = "button46_Click">
+        <Button Name ="button46" Margin="5" Grid.Row="3" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn46" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button47" Margin="5" Grid.Column="4" Grid.Row="7" Click = "button47_Click">
+        <Button Name ="button47" Margin="5" Grid.Row="3" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn47" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        
-        <!--5列目-->
-        <Button Name ="button50" Margin="5" Grid.Column="5" Grid.Row="0" Click = "button50_Click">
-            <Image Name ="btn50" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button48" Margin="5" Grid.Row="3" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn48" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button51" Margin="5" Grid.Column="5" Grid.Row="1" Click = "button51_Click">
+
+        <Button Name ="button51" Margin="5" Grid.Row="4" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn51" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button52" Margin="5" Grid.Column="5" Grid.Row="2" Click = "button52_Click">
+        <Button Name ="button52" Margin="5" Grid.Row="4" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn52" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button53" Margin="5" Grid.Column="5" Grid.Row="3" Click = "button53_Click">
+        <Button Name ="button53" Margin="5" Grid.Row="4" Grid.Column="2" Click = "buttonSquare_Click">
             <Image Name ="btn53" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button54" Margin="5" Grid.Column="5" Grid.Row="4" Click = "button54_Click">
-            <Image Name ="btn54" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button54" Margin="5" Grid.Row="4" Grid.Column="3" Click = "buttonSquare_Click">
+            <Image Name ="btn54" Source="Images\Black.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button55" Margin="5" Grid.Column="5" Grid.Row="5" Click = "button55_Click">
-            <Image Name ="btn55" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button55" Margin="5" Grid.Row="4" Grid.Column="4" Click = "buttonSquare_Click">
+            <Image Name ="btn55" Source="Images\White.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button56" Margin="5" Grid.Column="5" Grid.Row="6" Click = "button56_Click">
+        <Button Name ="button56" Margin="5" Grid.Row="4" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn56" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button57" Margin="5" Grid.Column="5" Grid.Row="7" Click = "button57_Click">
+        <Button Name ="button57" Margin="5" Grid.Row="4" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn57" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-
-        <!--6列目-->
-        <Button Name ="button60" Margin="5" Grid.Column="6" Grid.Row="0" Click = "button60_Click">
-            <Image Name ="btn60" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button58" Margin="5" Grid.Row="4" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn58" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button61" Margin="5" Grid.Column="6" Grid.Row="1" Click = "button61_Click">
+
+        <Button Name ="button61" Margin="5" Grid.Row="5" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn61" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button62" Margin="5" Grid.Column="6" Grid.Row="2" Click = "button62_Click">
+        <Button Name ="button62" Margin="5" Grid.Row="5" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn62" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button63" Margin="5" Grid.Column="6" Grid.Row="3" Click = "button63_Click">
+        <Button Name ="button63" Margin="5" Grid.Row="5" Grid.Column="2" Click = "buttonSquare_Click">
             <Image Name ="btn63" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button64" Margin="5" Grid.Column="6" Grid.Row="4" Click = "button64_Click">
+        <Button Name ="button64" Margin="5" Grid.Row="5" Grid.Column="3" Click = "buttonSquare_Click">
             <Image Name ="btn64" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button65" Margin="5" Grid.Column="6" Grid.Row="5" Click = "button65_Click">
+        <Button Name ="button65" Margin="5" Grid.Row="5" Grid.Column="4" Click = "buttonSquare_Click">
             <Image Name ="btn65" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button66" Margin="5" Grid.Column="6" Grid.Row="6" Click = "button66_Click">
+        <Button Name ="button66" Margin="5" Grid.Row="5" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn66" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button67" Margin="5" Grid.Column="6" Grid.Row="7" Click = "button67_Click">
+        <Button Name ="button67" Margin="5" Grid.Row="5" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn67" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-
-        <!--7列目-->
-        <Button Name ="button70" Margin="5" Grid.Column="7" Grid.Row="0" Click = "button70_Click">
-            <Image Name ="btn70" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        <Button Name ="button68" Margin="5" Grid.Row="5" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn68" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button71" Margin="5" Grid.Column="7" Grid.Row="1" Click = "button71_Click">
+
+        <Button Name ="button71" Margin="5" Grid.Row="6" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn71" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button72" Margin="5" Grid.Column="7" Grid.Row="2" Click = "button72_Click">
+        <Button Name ="button72" Margin="5" Grid.Row="6" Grid.Column="1" Click = "buttonSquare_Click">
             <Image Name ="btn72" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button73" Margin="5" Grid.Column="7" Grid.Row="3" Click = "button73_Click">
+        <Button Name ="button73" Margin="5" Grid.Row="6" Grid.Column="2" Click = "buttonSquare_Click">
             <Image Name ="btn73" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button74" Margin="5" Grid.Column="7" Grid.Row="4" Click = "button74_Click">
+        <Button Name ="button74" Margin="5" Grid.Row="6" Grid.Column="3" Click = "buttonSquare_Click">
             <Image Name ="btn74" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button75" Margin="5" Grid.Column="7" Grid.Row="5" Click = "button75_Click">
+        <Button Name ="button75" Margin="5" Grid.Row="6" Grid.Column="4" Click = "buttonSquare_Click">
             <Image Name ="btn75" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button76" Margin="5" Grid.Column="7" Grid.Row="6" Click = "button76_Click">
+        <Button Name ="button76" Margin="5" Grid.Row="6" Grid.Column="5" Click = "buttonSquare_Click">
             <Image Name ="btn76" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-        <Button Name ="button77" Margin="5" Grid.Column="7" Grid.Row="7" Click = "button77_Click">
+        <Button Name ="button77" Margin="5" Grid.Row="6" Grid.Column="6" Click = "buttonSquare_Click">
             <Image Name ="btn77" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
+        <Button Name ="button78" Margin="5" Grid.Row="6" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn78" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
 
-        </Grid>
+        <Button Name ="button81" Margin="5" Grid.Row="7" Grid.Column="0" Click = "buttonSquare_Click">
+            <Image Name ="btn81" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button82" Margin="5" Grid.Row="7" Grid.Column="1" Click = "buttonSquare_Click">
+            <Image Name ="btn82" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button83" Margin="5" Grid.Row="7" Grid.Column="2" Click = "buttonSquare_Click">
+            <Image Name ="btn83" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button84" Margin="5" Grid.Row="7" Grid.Column="3" Click = "buttonSquare_Click">
+            <Image Name ="btn84" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button85" Margin="5" Grid.Row="7" Grid.Column="4" Click = "buttonSquare_Click">
+            <Image Name ="btn85" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button86" Margin="5" Grid.Row="7" Grid.Column="5" Click = "buttonSquare_Click">
+            <Image Name ="btn86" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button87" Margin="5" Grid.Row="7" Grid.Column="6" Click = "buttonSquare_Click">
+            <Image Name ="btn87" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+        <Button Name ="button88" Margin="5" Grid.Row="7" Grid.Column="7" Click = "buttonSquare_Click">
+            <Image Name ="btn88" Source="Images\Green.png" VerticalAlignment="Stretch" />
+        </Button>
+
+
+
+    </Grid>
     <!--</Window>-->
 </Page>
