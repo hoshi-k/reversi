@@ -97,18 +97,57 @@ namespace オセロ
         {
             int tens = (btnName2 / 10) % 10;//btnName2の１０の位の数
             int ones = btnName2 % 10;//btnName2の１の位の数
+
+            bool right = RightCheck(tens, ones);
+            bool left = LeftCheck(tens, ones);
+            bool up = UpCheck(tens, ones);
+            bool down = DownCheck(tens, ones);
+            bool rightUp = RightUpCheck(tens, ones);
+            bool leftUp = LeftCheck(tens, ones);
+            bool rightDown = UpCheck(tens, ones);
+            bool leftDown = DownCheck(tens, ones);
+
             if (rowList[tens][ones] == 1)//置きたい場所が緑であるとき
             {
-                if (RightCheck(tens, ones) || 
-                    LeftCheck(tens, ones) || 
-                    UpCheck(tens, ones) || 
-                    DownCheck(tens, ones)||
-                    RightCheck(tens, ones) ||
-                    LeftCheck(tens, ones) ||
-                    UpCheck(tens, ones) ||
-                    DownCheck(tens, ones)) //ひっくり返せるか判定する処理
+                if (right || left || up || down || rightUp || rightDown || leftUp || leftDown) //ひっくり返せるか判定する処理
                 {
                     //ひっくり返す処理
+                    if (right)
+                    {
+                        RightReversi(tens, ones);
+                    }
+                    if (left)
+                    {
+                        LeftReversi(tens, ones);
+                    }
+                    if (up)
+                    {
+                        UpReversi(tens, ones);
+                    }
+                    if (down)
+                    {
+                        DownReversi(tens, ones);
+                    }
+                    if (rightUp)
+                    {
+                        RightUpReversi(tens, ones);
+                    }
+                    if (leftUp)
+                    {
+                        RightDownReversi(tens, ones);
+                    }
+                    if (rightDown)
+                    {
+                        LeftUpReversi(tens, ones);
+                    }
+                    if (leftDown)
+                    {
+                        LeftDownReversi(tens, ones);
+                    }
+                }
+                else
+                {
+                    //表示：おけない場所です
                 }
             }
             else
@@ -127,6 +166,7 @@ namespace オセロ
             {
                 for (int i = ones + 2; rowList[tens][i] != 0; ones++)//2つ右以降のチェック　番外になったら抜ける
                 {
+
                     if (rowList[tens][i] == color)//自分の色のとき
                     {
                         return true;
@@ -300,6 +340,146 @@ namespace オセロ
             return false;
         }
 
+        #endregion
+
+        #region ひっくり返す処理
+        private void RightReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            for (int i = ones + 1; rowList[tens][i] != 0; ones++)
+            {
+                if (rowList[tens][i] != color)//相手の色のときひっくり返す
+                {
+                    rowList[tens][i] = color;
+
+                }
+                else//自分の色のとき抜ける
+                {
+                    return;
+                }
+            }
+        }
+
+        private void LeftReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            for (int i = ones - 1; rowList[tens][i] != 0; ones--)
+            {
+                if (rowList[tens][i] != color)//相手の色のときひっくり返す
+                {
+                    rowList[tens][i] = color;
+
+                }
+                else//自分の色のとき抜ける
+                {
+                    return;
+                }
+            }
+        }
+
+        private void UpReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            for (int i = tens + 1; rowList[i][ones] != 0; tens++)
+            {
+                if (rowList[i][ones] != color)//相手の色のときひっくり返す
+                {
+                    rowList[i][ones] = color;
+
+                }
+                else//自分の色のとき抜ける
+                {
+                    return;
+                }
+            }
+        }
+
+        private void DownReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            for (int i = tens - 1; rowList[i][ones] != 0; tens--)
+            {
+                if (rowList[i][ones] != color)//相手の色のときひっくり返す
+                {
+                    rowList[i][ones] = color;
+
+                }
+                else//自分の色のとき抜ける
+                {
+                    return;
+                }
+            }
+        }
+
+        private void RightUpReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            int k = 1;
+            while (rowList[tens + k][ones + k] != 0)
+            {
+                if (rowList[tens + k][ones + k] != color)//相手の色のとき
+                {
+                    rowList[tens + k][ones + k] = color;
+                }
+                else if (rowList[tens + k][ones + k] == color)//自分の色のとき抜ける
+                {
+                    return;
+                }
+                k++;
+            }
+        }
+
+        private void RightDownReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            int k = 1;
+            while (rowList[tens - k][ones + k] != 0)
+            {
+                if (rowList[tens - k][ones + k] != color)//相手の色のとき
+                {
+                    rowList[tens - k][ones + k] = color;
+                }
+                else if (rowList[tens - k][ones + k] == color)//自分の色のとき抜ける
+                {
+                    return;
+                }
+                k++;
+            }
+        }
+        private void LeftUpReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            int k = 1;
+            while (rowList[tens + k][ones - k] != 0)
+            {
+                if (rowList[tens + k][ones - k] != color)//相手の色のとき
+                {
+                    rowList[tens + k][ones - k] = color;
+                }
+                else if (rowList[tens + k][ones - k] == color)//自分の色のとき抜ける
+                {
+                    return;
+                }
+                k++;
+            }
+        }
+        private void LeftDownReversi(int tens, int ones)
+        {
+            int color = GetPutStoneColoer();
+            int k = 1;
+            while (rowList[tens - k][ones - k] != 0)
+            {
+                if (rowList[tens - k][ones - k] != color)//相手の色のとき
+                {
+                    rowList[tens - k][ones - k] = color;
+                }
+                else if (rowList[tens - k][ones - k] == color)//自分の色のとき抜ける
+                {
+                    return;
+                }
+                k++;
+            }
+        }
         #endregion
 
         //private int[] GetRow(int row)
