@@ -68,17 +68,17 @@ namespace オセロ
             }
         }
 
-        private ImageSource GetPutStoneImage()
-        {
-            if (firstPlayerTarn)
-            {
-                return IMG_BLACK;
-            }
-            else
-            {
-                return IMG_WHITE;
-            }
-        }
+        //private ImageSource GetPutStoneImage()
+        //{
+        //    if (firstPlayerTarn)
+        //    {
+        //        return IMG_BLACK;
+        //    }
+        //    else
+        //    {
+        //        return IMG_WHITE;
+        //    }
+        //}
 
         private int GetPutStoneColoer()
         {
@@ -93,85 +93,85 @@ namespace オセロ
         }
 
         //置こうとしたマスがおける場所なのかチェックする関数
-        private void CheckTurnUpsideDown(int btnName2)
+        private bool CheckTurnUpsideDown(int btnName2, int y, int x)
         {
-            int tens = (btnName2 / 10) % 10;//btnName2の１０の位の数
-            int ones = btnName2 % 10;//btnName2の１の位の数
+            bool right = RightCheck(y, x);
+            bool left = LeftCheck(y, x);
+            bool up = UpCheck(y, x);
+            bool down = DownCheck(y, x);
+            bool rightUp = RightUpCheck(y, x);
+            bool leftUp = LeftCheck(y, x);
+            bool rightDown = UpCheck(y, x);
+            bool leftDown = DownCheck(y, x);
 
-            bool right = RightCheck(tens, ones);
-            bool left = LeftCheck(tens, ones);
-            bool up = UpCheck(tens, ones);
-            bool down = DownCheck(tens, ones);
-            bool rightUp = RightUpCheck(tens, ones);
-            bool leftUp = LeftCheck(tens, ones);
-            bool rightDown = UpCheck(tens, ones);
-            bool leftDown = DownCheck(tens, ones);
-
-            if (rowList[tens][ones] == 1)//置きたい場所が緑であるとき
+            if (rowList[y][x] == 1)//置きたい場所が緑であるとき
             {
-                if (right || left || up || down || rightUp || rightDown || leftUp || leftDown) //ひっくり返せるか判定する処理
+                if (right || left || up || down || rightUp || rightDown || leftUp || leftDown) //ひっくり返せるか判定する
                 {
-                    //ひっくり返す処理
+                    //ひっくり返す処理 TODO:分離
                     if (right)
                     {
-                        RightReversi(tens, ones);
+                        RightReversi(y, x);
                     }
                     if (left)
                     {
-                        LeftReversi(tens, ones);
+                        LeftReversi(y, x);
                     }
                     if (up)
                     {
-                        UpReversi(tens, ones);
+                        UpReversi(y, x);
                     }
                     if (down)
                     {
-                        DownReversi(tens, ones);
+                        DownReversi(y, x);
                     }
                     if (rightUp)
                     {
-                        RightUpReversi(tens, ones);
+                        RightUpReversi(y, x);
                     }
                     if (leftUp)
                     {
-                        RightDownReversi(tens, ones);
+                        RightDownReversi(y, x);
                     }
                     if (rightDown)
                     {
-                        LeftUpReversi(tens, ones);
+                        LeftUpReversi(y, x);
                     }
                     if (leftDown)
                     {
-                        LeftDownReversi(tens, ones);
+                        LeftDownReversi(y, x);
                     }
+                    return true;
                 }
                 else
                 {
                     //表示：おけない場所です
+                    return false;
                 }
             }
             else
             {
                 //表示：おけない場所です
+                return false;
             }
         }
 
 
         #region ひっくり返せるか判定する処理
 
-        private bool RightCheck(int tens, int ones)
+        private bool RightCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
-            if (rowList[tens][ones + 1] != color)//一つ右が相手の石の時
+            if (rowList[y][x + 1] != color && rowList[y][x + 1] != 0 && rowList[y][x + 1] != 1)//一つ右が相手の石の時
             {
-                for (int i = ones + 2; rowList[tens][i] != 0; ones++)//2つ右以降のチェック　番外になったら抜ける
+                for (int i = x + 2; rowList[y][i] != 0; i++)//2つ右以降のチェック　番外になったら抜ける
                 {
 
-                    if (rowList[tens][i] == color)//自分の色のとき
+                    if (rowList[y][i] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens][i] == 1)//緑のとき抜ける
+                    else if (rowList[y][i] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -180,18 +180,18 @@ namespace オセロ
             return false;
         }
 
-        private bool LeftCheck(int tens, int ones)
+        private bool LeftCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
-            if (rowList[tens][ones - 1] != color || rowList[tens][ones - 1] != 0)//一つ左が相手の石の時
+            if (rowList[y][x - 1] != color && rowList[y][x - 1] != 0 && rowList[y][x - 1] != 1)//一つ左が相手の石の時
             {
-                for (int i = ones - 2; rowList[tens][i] != 0; ones--)//2つ右以降のチェック　番外になったら抜ける
+                for (int i = x - 2; rowList[y][i] > 0; i--)//2つ右以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[tens][i] == color)//自分の色のとき
+                    if (rowList[y][i] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens][i] == 1)//緑のとき抜ける
+                    else if (rowList[y][i] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -200,18 +200,18 @@ namespace オセロ
             return false;
         }
 
-        private bool UpCheck(int tens, int ones)
+        private bool UpCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
-            if (rowList[tens+1][ones] != color || rowList[tens+1][ones] != 0)//一つ上が相手の石の時
+            if (rowList[y - 1][x] != color && rowList[y - 1][x] != 0 && rowList[y - 1][x] != 1)//一つ上が相手の石の時
             {
-                for (int j = tens + 2; rowList[tens][ones] != 0; tens++)//2つ上以降のチェック　番外になったら抜ける
+                for (int j = y - 2; rowList[y][x] != 0; j--)//2つ上以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[j][ones] == color)//自分の色のとき
+                    if (rowList[j][x] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[j][ones] == 1)//緑のとき抜ける
+                    else if (rowList[j][x] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -220,18 +220,18 @@ namespace オセロ
             return false;
         }
 
-        private bool DownCheck(int tens, int ones)
+        private bool DownCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
-            if (rowList[tens - 1][ones] != color || rowList[tens - 1][ones] != 0)//一つ上が相手の石の時
+            if (rowList[y + 1][x] != color && rowList[y + 1][x] != 0 && rowList[y + 1][x] != 1)//一つ上が相手の石の時
             {
-                for (int j = tens - 2; rowList[tens][ones] != 0; tens--)//2つ上以降のチェック　番外になったら抜ける
+                for (int j = y + 2; rowList[y][x] != 0; j++)//2つ上以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[j][ones] == color)//自分の色のとき
+                    if (rowList[j][x] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[j][ones] == 1)//緑のとき抜ける
+                    else if (rowList[j][x] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -240,19 +240,19 @@ namespace オセロ
             return false;
         }
 
-        private bool RightUpCheck(int tens, int ones)
+        private bool RightUpCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 2;
-            if (rowList[tens + 1][ones + 1] != color)//一つ右上が相手の石の時
+            if (rowList[y - 1][x + 1] != color && rowList[y - 1][x + 1] != 0 && rowList[y - 1][x + 1] != 1)//一つ右上が相手の石の時
             {
-                while (rowList[tens + k][ones + k] != 0)//2つ右以降のチェック　番外になったら抜ける
+                while (rowList[y - k][x + k] != 0)//2つ右以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[tens + k][ones + k] == color)//自分の色のとき
+                    if (rowList[y - k][x + k] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens + k][ones + k] == 1)//緑のとき抜ける
+                    else if (rowList[y - k][x + k] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -265,19 +265,19 @@ namespace オセロ
             return false;
         }
 
-        private bool LeftUpCheck(int tens, int ones)
+        private bool LeftUpCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 2;
-            if (rowList[tens + 1][ones - 1] != color)//一つ左上が相手の石の時
+            if (rowList[y - 1][x - 1] != color && rowList[y - 1][x - 1] != 0 && rowList[y - 1][x - 1] != 1)//一つ左上が相手の石の時
             {
-                while (rowList[tens + k][ones + k] != 0)//2つ左上以降のチェック　番外になったら抜ける
+                while (rowList[y - k][x + k] != 0)//2つ左上以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[tens + k][ones - k] == color)//自分の色のとき
+                    if (rowList[y - k][x - k] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens + k][ones - k] == 1)//緑のとき抜ける
+                    else if (rowList[y - k][x - k] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -290,19 +290,19 @@ namespace オセロ
             return false;
         }
 
-        private bool RightDownCheck(int tens, int ones)
+        private bool RightDownCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 2;
-            if (rowList[tens - 1][ones + 1] != color)//一つ右下が相手の石の時
+            if (rowList[y + 1][x + 1] != color && rowList[y + 1][x + 1] != 0 && rowList[y + 1][x + 1] != 1)//一つ右下が相手の石の時
             {
-                while (rowList[tens - k][ones + k] != 0)//2つ右下以降のチェック　番外になったら抜ける
+                while (rowList[y + k][x + k] != 0)//2つ右下以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[tens - k][ones + k] == color)//自分の色のとき
+                    if (rowList[y + k][x + k] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens - k][ones + k] == 1)//緑のとき抜ける
+                    else if (rowList[y + k][x + k] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -315,19 +315,19 @@ namespace オセロ
             return false;
         }
 
-        private bool LeftDownCheck(int tens, int ones)
+        private bool LeftDownCheck(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 2;
-            if (rowList[tens - 1][ones - 1] != color)//一つ左下が相手の石の時
+            if (rowList[y + 1][x - 1] != color && rowList[y + 1][x - 1] != 0 && rowList[y + 1][x - 1] != 1)//一つ左下が相手の石の時
             {
-                while (rowList[tens - k][ones - k] != 0)//2つ左下以降のチェック　番外になったら抜ける
+                while (rowList[y + k][x - k] != 0)//2つ左下以降のチェック　番外になったら抜ける
                 {
-                    if (rowList[tens - k][ones - k] == color)//自分の色のとき
+                    if (rowList[y + k][x - k] == color)//自分の色のとき
                     {
                         return true;
                     }
-                    else if (rowList[tens - k][ones - k] == 1)//緑のとき抜ける
+                    else if (rowList[y + k][x - k] == 1)//緑のとき抜ける
                     {
                         return false;
                     }
@@ -343,14 +343,20 @@ namespace オセロ
         #endregion
 
         #region ひっくり返す処理
-        private void RightReversi(int tens, int ones)
+
+        private void Reversi(int y, int x)
+        {
+            //TODO:ひっくり返す処理を分離
+        }
+
+        private void RightReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
-            for (int i = ones + 1; rowList[tens][i] != 0; ones++)
+            for (int i = x + 1; rowList[y][i] != 0; i++)
             {
-                if (rowList[tens][i] != color)//相手の色のときひっくり返す
+                if (rowList[y][i] != color && rowList[y][i] != 0 && rowList[y][i] != 1)//相手の色のときひっくり返す
                 {
-                    rowList[tens][i] = color;
+                    rowList[y][i] = color;
 
                 }
                 else//自分の色のとき抜ける
@@ -360,14 +366,14 @@ namespace オセロ
             }
         }
 
-        private void LeftReversi(int tens, int ones)
+        private void LeftReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
-            for (int i = ones - 1; rowList[tens][i] != 0; ones--)
+            for (int i = x - 1; rowList[y][i] != 0; i--)
             {
-                if (rowList[tens][i] != color)//相手の色のときひっくり返す
+                if (rowList[y][i] != color && rowList[y][i] != 0 && rowList[y][i] != 1)//相手の色のときひっくり返す
                 {
-                    rowList[tens][i] = color;
+                    rowList[y][i] = color;
 
                 }
                 else//自分の色のとき抜ける
@@ -377,14 +383,14 @@ namespace オセロ
             }
         }
 
-        private void UpReversi(int tens, int ones)
+        private void UpReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
-            for (int i = tens + 1; rowList[i][ones] != 0; tens++)
+            for (int i = y - 1; rowList[i][x] != 0; i--)
             {
-                if (rowList[i][ones] != color)//相手の色のときひっくり返す
+                if (rowList[i][x] != color && rowList[i][x] != 0 && rowList[i][x] != 1)//相手の色のときひっくり返す
                 {
-                    rowList[i][ones] = color;
+                    rowList[i][x] = color;
 
                 }
                 else//自分の色のとき抜ける
@@ -394,14 +400,14 @@ namespace オセロ
             }
         }
 
-        private void DownReversi(int tens, int ones)
+        private void DownReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
-            for (int i = tens - 1; rowList[i][ones] != 0; tens--)
+            for (int i = y + 1; rowList[i][x] != 0; i++)
             {
-                if (rowList[i][ones] != color)//相手の色のときひっくり返す
+                if (rowList[i][x] != color && rowList[y][i] != 0 && rowList[y][i] != 1)//相手の色のときひっくり返す
                 {
-                    rowList[i][ones] = color;
+                    rowList[i][x] = color;
 
                 }
                 else//自分の色のとき抜ける
@@ -411,17 +417,17 @@ namespace オセロ
             }
         }
 
-        private void RightUpReversi(int tens, int ones)
+        private void RightUpReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 1;
-            while (rowList[tens + k][ones + k] != 0)
+            while (rowList[y - k][x + k] != 0)
             {
-                if (rowList[tens + k][ones + k] != color)//相手の色のとき
+                if (rowList[y - k][x + k] != color && rowList[y - k][x + k] != 0 && rowList[y - k][x + k] != 1)//相手の色のとき
                 {
-                    rowList[tens + k][ones + k] = color;
+                    rowList[y - k][x + k] = color;
                 }
-                else if (rowList[tens + k][ones + k] == color)//自分の色のとき抜ける
+                else if (rowList[y - k][x + k] == color)//自分の色のとき抜ける
                 {
                     return;
                 }
@@ -429,51 +435,51 @@ namespace オセロ
             }
         }
 
-        private void RightDownReversi(int tens, int ones)
+        private void RightDownReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 1;
-            while (rowList[tens - k][ones + k] != 0)
+            while (rowList[y + k][x + k] != 0)
             {
-                if (rowList[tens - k][ones + k] != color)//相手の色のとき
+                if (rowList[y + k][x + k] != color && rowList[y + k][x + k] != 0 && rowList[y + k][x + k] != 1)//相手の色のとき
                 {
-                    rowList[tens - k][ones + k] = color;
+                    rowList[y + k][x + k] = color;
                 }
-                else if (rowList[tens - k][ones + k] == color)//自分の色のとき抜ける
+                else if (rowList[y + k][x + k] == color)//自分の色のとき抜ける
                 {
                     return;
                 }
                 k++;
             }
         }
-        private void LeftUpReversi(int tens, int ones)
+        private void LeftUpReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 1;
-            while (rowList[tens + k][ones - k] != 0)
+            while (rowList[y - k][x - k] != 0)
             {
-                if (rowList[tens + k][ones - k] != color)//相手の色のとき
+                if (rowList[y - k][x - k] != color && rowList[y - k][x - k] != 0 && rowList[y - k][x - k] != 1)//相手の色のとき
                 {
-                    rowList[tens + k][ones - k] = color;
+                    rowList[y - k][x - k] = color;
                 }
-                else if (rowList[tens + k][ones - k] == color)//自分の色のとき抜ける
+                else if (rowList[y - k][x - k] == color)//自分の色のとき抜ける
                 {
                     return;
                 }
                 k++;
             }
         }
-        private void LeftDownReversi(int tens, int ones)
+        private void LeftDownReversi(int y, int x)
         {
             int color = GetPutStoneColoer();
             int k = 1;
-            while (rowList[tens - k][ones - k] != 0)
+            while (rowList[y + k][x - k] != 0)
             {
-                if (rowList[tens - k][ones - k] != color)//相手の色のとき
+                if (rowList[y + k][x - k] != color && rowList[y + k][x - k] != 0 && rowList[y + k][x - k] != 1)//相手の色のとき
                 {
-                    rowList[tens - k][ones - k] = color;
+                    rowList[y + k][x - k] = color;
                 }
-                else if (rowList[tens - k][ones - k] == color)//自分の色のとき抜ける
+                else if (rowList[y + k][x - k] == color)//自分の色のとき抜ける
                 {
                     return;
                 }
@@ -481,35 +487,6 @@ namespace オセロ
             }
         }
         #endregion
-
-        //private int[] GetRow(int row)
-        //{
-        //    switch (row)
-        //    {
-        //        case 0:
-        //            return row0;
-        //        case 1:
-        //            return row1;
-        //        case 2:
-        //            return row2;
-        //        case 3:
-        //            return row3;
-        //        case 4:
-        //            return row4;
-        //        case 5:
-        //            return row5;
-        //        case 6:
-        //            return row6;
-        //        case 7:
-        //            return row7;
-        //        case 8:
-        //            return row8;
-        //        case 9:
-        //            return row9;
-        //        default:
-        //            return row0;
-        //    }
-        //}
 
         //最後に盤面を画面に反映する関数
         private void ReflectOnBoard()
@@ -547,11 +524,17 @@ namespace オセロ
 
             string btnName = srcButton.Name;
             int btnName2 = int.Parse(btnName.Replace("button", ""));
-            CheckTurnUpsideDown(btnName2);
 
-            if (square.Source == IMG_GREEN)
+            int y = (btnName2 / 10) % 10;//btnName2の１０の位の数 = 縦のマス数
+            int x = btnName2 % 10;//btnName2の１の位の数 = 横のマス数
+
+            //自分の石を置けるかどうかのチェック
+            bool checkOK = CheckTurnUpsideDown(btnName2, y, x);
+
+            if (square.Source == IMG_GREEN && checkOK)
             {
-                square.Source = GetPutStoneImage();
+                int color = GetPutStoneColoer();
+                rowList[y][x] = color;
                 ChangeTarn();
             }
             ReflectOnBoard();
