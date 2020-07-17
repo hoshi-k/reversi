@@ -25,6 +25,10 @@ namespace オセロ
         ImageSource IMG_WHITE;
         ImageSource IMG_BLACK;
         bool firstPlayerTarn = true;
+
+        int blackNum = 0;
+        int whiteNum = 0;
+
         List<int[]> rowList = new List<int[]>()
         {
         new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -60,7 +64,7 @@ namespace オセロ
             int x = btnName2 % 10;//btnName2の１の位の数 = 横のマス数
 
             //自分の石を置けるかどうかのチェック
-            bool checkOK = CheckTurnUpsideDown(btnName2, y, x);
+            bool checkOK = CheckTurnUpsideDown(y, x);
 
             if (square.Source == IMG_GREEN && checkOK)
             {
@@ -68,10 +72,12 @@ namespace オセロ
                 int opponentColor = 0;
                 GetPutStoneColoer(out playerColor, out opponentColor);
                 rowList[y][x] = playerColor;
+
                 ChangeTarn();
             }
             ReflectOnBoard();
-
+            CheckOpponentColorExist();
+            CheckNoneColorExist();
         }
 
         //最後に盤面を画面に反映する関数
@@ -130,7 +136,7 @@ namespace オセロ
         }
 
         //置こうとしたマスがおける場所なのかチェックする関数
-        private bool CheckTurnUpsideDown(int btnName2, int y, int x)
+        private bool CheckTurnUpsideDown(int y, int x)
         {
             bool right = RightCheck(y, x);
             bool left = LeftCheck(y, x);
@@ -693,18 +699,53 @@ namespace オセロ
             }
         }
 
-        //指定した色のマスを取得する
-        //TODO: 現在の盤面の状況をUIに表示する
-        //TODO:　自分の色がないとき、ゲーム終了処理を行う
+        //TODO:　相手の色がないとき、ゲーム終了処理を行う
+        private void CheckOpponentColorExist()
+        {
+            int playerColor = 0;
+            int opponentColor = 0;
+            GetPutStoneColoer(out playerColor, out opponentColor);
+            if (0 == GetNumOfStorn(opponentColor))
+            {
+                GameEnd();
+            }
+        }
+
         //TODO:　緑のマスがないとき、ゲーム終了処理を行う
-        //TODO:　ゲーム終了処理時に、石の数を比べて勝敗を判定する
+        private void CheckNoneColorExist()
+        {
+            if (0 == GetNumOfStorn(1))
+            {
+                GameEnd();
+            }
+        }
+        //自分が置ける場所がないとき、パスする
+        private bool CheckCanPutStones()
+        {
+            for (int i = 1; i <= 8; i++)
+            {
+                for (int j = 1; j <= 8; j++)
+                {
+                    if (rowList[i][j] == 1)//TODO: 統合
+                    {
+                        if (CheckTurnUpsideDown(i, j))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        //指定した色のマスを取得する
         private int GetNumOfStorn(int color)
         {
             int count = 0;
 
-            for (int i = 0; i <= 10; i++)
+            for (int i = 1; i <= 8; i++)
             {
-                for (int j = 0; j <= 10; j++)
+                for (int j = 1; j <= 8; j++)
                 {
                     if (rowList[i][j] == color)
                     {
@@ -715,16 +756,29 @@ namespace オセロ
             return count;
         }
 
-        //ゲーム終了処理
+        //TODO: 現在の盤面の状況をUIに表示する
+
+        //石の数を更新する
+        private void UpdateNumOfStorns()
+        {
+            blackNum = GetNumOfStorn(2);
+            whiteNum = GetNumOfStorn(3);
+        }
+
+        //ゲーム終了処理　石の数を比べて勝敗を判定する
         private void GameEnd()
         {
-            if (true)
+            if (blackNum > whiteNum)
             {
                 MessageBox.Show("黒プレイヤーの勝利です");
             }
-            else
+            else if (whiteNum > blackNum)
             {
                 MessageBox.Show("白プレイヤーの勝利です");
+            }
+            if (whiteNum == blackNum)
+            {
+                MessageBox.Show("引き分けです");
             }
         }
     }
