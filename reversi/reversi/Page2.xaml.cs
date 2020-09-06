@@ -72,7 +72,6 @@ namespace オセロ
                 int opponentColor = 0;
                 GetPutStoneColoer(out playerColor, out opponentColor);
                 rowList[y][x] = playerColor;
-
                 ChangeTarn();
             }
             ReflectOnBoard();
@@ -106,6 +105,7 @@ namespace オセロ
                     }
                 }
             }
+            UpdateNumOfStorns();
         }
 
         private void ChangeTarn()
@@ -699,7 +699,7 @@ namespace オセロ
             }
         }
 
-        //TODO:　相手の色がないとき、ゲーム終了処理を行う
+        //相手の色がないとき、ゲーム終了処理を行う
         private void CheckOpponentColorExist()
         {
             int playerColor = 0;
@@ -711,7 +711,7 @@ namespace オセロ
             }
         }
 
-        //TODO:　緑のマスがないとき、ゲーム終了処理を行う
+        //緑のマスがないとき、ゲーム終了処理を行う
         private void CheckNoneColorExist()
         {
             if (0 == GetNumOfStorn(1))
@@ -719,6 +719,7 @@ namespace オセロ
                 GameEnd();
             }
         }
+
         //自分が置ける場所がないとき、パスする
         private bool CheckCanPutStones()
         {
@@ -755,14 +756,14 @@ namespace オセロ
             }
             return count;
         }
-
-        //TODO: 現在の盤面の状況をUIに表示する
-
+    
         //石の数を更新する
         private void UpdateNumOfStorns()
         {
             blackNum = GetNumOfStorn(2);
             whiteNum = GetNumOfStorn(3);
+            textBlockBlack.Text = "黒："+ blackNum;
+            textBlockWhite.Text = "白：" + whiteNum;
         }
 
         //ゲーム終了処理　石の数を比べて勝敗を判定する

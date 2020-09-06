@@ -38,7 +38,7 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-       
+
 
         <Button Name ="button11" Margin="5" Grid.Row="0" Grid.Column="0" Click = "buttonSquare_Click">
             <Image Name ="btn11" Source="Images\Green.png" VerticalAlignment="Stretch" />
@@ -239,9 +239,8 @@
         <Button Name ="button88" Margin="5" Grid.Row="7" Grid.Column="7" Click = "buttonSquare_Click">
             <Image Name ="btn88" Source="Images\Green.png" VerticalAlignment="Stretch" />
         </Button>
-
-
-
+        <TextBlock x:Name="textBlockBlack" Grid.Column="7" HorizontalAlignment="Left" Margin="101.667,10,-145.333,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="145" Height="52"/>
+        <TextBlock x:Name="textBlockWhite" Grid.Column="7" HorizontalAlignment="Left" Margin="101.667,10.667,-179.333,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="179" Height="60"/>
     </Grid>
     <!--</Window>-->
 </Page>
