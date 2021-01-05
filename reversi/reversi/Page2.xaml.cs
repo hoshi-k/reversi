@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Resources;
 
-namespace オセロ
+namespace reversi
 {
     /// <summary>
     /// Page2.xaml の相互作用ロジック
@@ -24,12 +24,12 @@ namespace オセロ
         ImageSource IMG_GREEN;
         ImageSource IMG_WHITE;
         ImageSource IMG_BLACK;
-        bool firstPlayerTarn = true;
+        static public bool firstPlayerTarn = true;
 
         int blackNum = 0;
         int whiteNum = 0;
 
-        List<int[]> rowList = new List<int[]>()
+        List<int[]> boadList = new List<int[]>()
         {
         new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
@@ -41,7 +41,8 @@ namespace オセロ
         new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
         new int[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
         new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-    };
+        };
+
         public Page2()
         {
             InitializeComponent();
@@ -51,521 +52,11 @@ namespace オセロ
             ReflectOnBoard();
         }
 
-        //マスのボタンを押したときに走る関数
-        private void buttonSquare_Click(object sender, RoutedEventArgs e)
+        private Image GetSorce(string strCoodinate)
         {
-            Button srcButton = (Button)e.Source;
-            Image square = (Image)srcButton.Content;
-
-            string btnName = srcButton.Name;
-            int btnName2 = int.Parse(btnName.Replace("button", ""));
-
-            int y = (btnName2 / 10) % 10;//btnName2の１０の位の数 = 縦のマス数
-            int x = btnName2 % 10;//btnName2の１の位の数 = 横のマス数
-
-            //自分の石を置けるかどうかのチェック
-            bool checkOK = CheckTurnUpsideDown(y, x);
-
-            if (square.Source == IMG_GREEN && checkOK)
+            switch (strCoodinate)
             {
-                int playerColor = 0;
-                int opponentColor = 0;
-                GetPutStoneColoer(out playerColor, out opponentColor);
-                rowList[y][x] = playerColor;
-                ChangeTarn();
-            }
-            ReflectOnBoard();
-            CheckOpponentColorExist();
-            CheckNoneColorExist();
-        }
-
-        //最後に盤面を画面に反映する関数
-        private void ReflectOnBoard()
-        {
-            for (int row = 0; row <= 9; row++)
-            {
-                int[] rowwww = rowList[row];
-                for (int line = 0; line <= 9; line++)
-                {
-                    string rowstr = row.ToString();
-                    string linestr = line.ToString();
-                    string aaa = rowstr + linestr;
-                    Image sorce = GetSorce(aaa);
-                    if (rowwww[line] == 1)
-                    {
-                        sorce.Source = IMG_GREEN;
-                    }
-                    if (rowwww[line] == 2)
-                    {
-                        sorce.Source = IMG_WHITE;
-                    }
-                    if (rowwww[line] == 3)
-                    {
-                        sorce.Source = IMG_BLACK;
-                    }
-                }
-            }
-            UpdateNumOfStorns();
-        }
-
-        private void ChangeTarn()
-        {
-            if (firstPlayerTarn)
-            {
-                firstPlayerTarn = false;
-            }
-            else
-            {
-                firstPlayerTarn = true;
-            }
-        }
-
-        //プレイヤーの色と相手の色を取得する関数
-        private void GetPutStoneColoer(out int playerColor, out int opponentColor)
-        {
-            if (firstPlayerTarn)
-            {
-                playerColor = 3; //黒
-                opponentColor = 2; //白
-            }
-            else
-            {
-                playerColor = 2; //白
-                opponentColor = 3; //黒
-            }
-        }
-
-        //置こうとしたマスがおける場所なのかチェックする関数
-        private bool CheckTurnUpsideDown(int y, int x)
-        {
-            bool right = RightCheck(y, x);
-            bool left = LeftCheck(y, x);
-            bool up = UpCheck(y, x);
-            bool down = DownCheck(y, x);
-            bool rightUp = RightUpCheck(y, x);
-            bool leftUp = LeftUpCheck(y, x);
-            bool rightDown = RightDownCheck(y, x);
-            bool leftDown = LeftDownCheck(y, x);
-
-            if (rowList[y][x] == 1)//置きたい場所が緑であるとき
-            {
-                if (right || left || up || down || rightUp || rightDown || leftUp || leftDown) //ひっくり返せるか判定する
-                {
-                    //ひっくり返す処理 TODO:分離
-                    if (right)
-                    {
-                        RightReversi(y, x);
-                    }
-                    if (left)
-                    {
-                        LeftReversi(y, x);
-                    }
-                    if (up)
-                    {
-                        UpReversi(y, x);
-                    }
-                    if (down)
-                    {
-                        DownReversi(y, x);
-                    }
-                    if (rightUp)
-                    {
-                        RightUpReversi(y, x);
-                    }
-                    if (leftUp)
-                    {
-                        LeftUpReversi(y, x);
-                    }
-                    if (rightDown)
-                    {
-                        RightDownReversi(y, x);
-                    }
-                    if (leftDown)
-                    {
-                        LeftDownReversi(y, x);
-                    }
-                    return true;
-                }
-                else
-                {
-                    //表示：おけない場所です
-                    return false;
-                }
-            }
-            else
-            {
-                //表示：おけない場所です
-                return false;
-            }
-        }
-
-        #region ひっくり返せるか判定する処理
-
-        private bool RightCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            if (rowList[y][x + 1] == opponentColor)//一つ右が相手の石の時
-            {
-                for (int i = x + 2; rowList[y][i] != 0; i++)//2つ右以降のチェック　番外になったら抜ける
-                {
-
-                    if (rowList[y][i] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y][i] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool LeftCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            if (rowList[y][x - 1] == opponentColor)//一つ左が相手の石の時
-            {
-                for (int i = x - 2; rowList[y][i] > 0; i--)//2つ右以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[y][i] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y][i] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool UpCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            if (rowList[y - 1][x] == opponentColor)//一つ上が相手の石の時
-            {
-                for (int j = y - 2; rowList[y][x] != 0; j--)//2つ上以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[j][x] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[j][x] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool DownCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            if (rowList[y + 1][x] == opponentColor)//一つ上が相手の石の時
-            {
-                for (int j = y + 2; rowList[y][x] != 0; j++)//2つ上以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[j][x] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[j][x] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool RightUpCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 2;
-            if (rowList[y - 1][x + 1] == opponentColor)//一つ右上が相手の石の時
-            {
-                while (rowList[y - k][x + k] != 0)//2つ右以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[y - k][x + k] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y - k][x + k] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool LeftUpCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 2;
-            if (rowList[y - 1][x - 1] == opponentColor)//一つ左上が相手の石の時
-            {
-                while (rowList[y - k][x - k] != 0)//2つ左上以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[y - k][x - k] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y - k][x - k] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool RightDownCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 2;
-            if (rowList[y + 1][x + 1] == opponentColor)//一つ右下が相手の石の時
-            {
-                while (rowList[y + k][x + k] != 0)//2つ右下以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[y + k][x + k] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y + k][x + k] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private bool LeftDownCheck(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 2;
-            if (rowList[y + 1][x - 1] == opponentColor)//一つ左下が相手の石の時
-            {
-                while (rowList[y + k][x - k] != 0)//2つ左下以降のチェック　番外になったら抜ける
-                {
-                    if (rowList[y + k][x - k] == playerColor)//自分の色のとき
-                    {
-                        return true;
-                    }
-                    else if (rowList[y + k][x - k] == 1)//緑のとき抜ける
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        k++;
-                    }
-                }
-            }
-            return false;
-        }
-
-        #endregion
-
-        #region ひっくり返す処理
-
-        private void Reversi(int y, int x)
-        {
-            //TODO:ひっくり返す処理を分離
-        }
-
-        private void RightReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            for (int i = x + 1; rowList[y][i] != 0; i++)
-            {
-                if (rowList[y][i] == opponentColor)//相手の色のときひっくり返す
-                {
-                    rowList[y][i] = playerColor;
-
-                }
-                else//自分の色のとき抜ける
-                {
-                    return;
-                }
-            }
-        }
-
-        private void LeftReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            for (int i = x - 1; rowList[y][i] != 0; i--)
-            {
-                if (rowList[y][i] == opponentColor)//相手の色のときひっくり返す
-                {
-                    rowList[y][i] = playerColor;
-
-                }
-                else//自分の色のとき抜ける
-                {
-                    return;
-                }
-            }
-        }
-
-        private void UpReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            for (int i = y - 1; rowList[i][x] != 0; i--)
-            {
-                if (rowList[i][x] == opponentColor)//相手の色のときひっくり返す
-                {
-                    rowList[i][x] = playerColor;
-
-                }
-                else//自分の色のとき抜ける
-                {
-                    return;
-                }
-            }
-        }
-
-        private void DownReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            for (int i = y + 1; rowList[i][x] != 0; i++)
-            {
-                if (rowList[i][x] == opponentColor)//相手の色のときひっくり返す
-                {
-                    rowList[i][x] = playerColor;
-
-                }
-                else//自分の色のとき抜ける
-                {
-                    return;
-                }
-            }
-        }
-
-        private void RightUpReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 1;
-            while (rowList[y - k][x + k] != 0)
-            {
-                if (rowList[y - k][x + k] == opponentColor)//相手の色のとき
-                {
-                    rowList[y - k][x + k] = playerColor;
-                }
-                else if (rowList[y - k][x + k] == playerColor)//自分の色のとき抜ける
-                {
-                    return;
-                }
-                k++;
-            }
-        }
-
-        private void RightDownReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 1;
-            while (rowList[y + k][x + k] != 0)
-            {
-                if (rowList[y + k][x + k] == opponentColor)//相手の色のとき
-                {
-                    rowList[y + k][x + k] = playerColor;
-                }
-                else if (rowList[y + k][x + k] == playerColor)//自分の色のとき抜ける
-                {
-                    return;
-                }
-                k++;
-            }
-        }
-        private void LeftUpReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 1;
-            while (rowList[y - k][x - k] != 0)
-            {
-                if (rowList[y - k][x - k] == opponentColor)//相手の色のとき
-                {
-                    rowList[y - k][x - k] = playerColor;
-                }
-                else if (rowList[y - k][x - k] == playerColor)//自分の色のとき抜ける
-                {
-                    return;
-                }
-                k++;
-            }
-        }
-        private void LeftDownReversi(int y, int x)
-        {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            int k = 1;
-            while (rowList[y + k][x - k] != 0)
-            {
-                if (rowList[y + k][x - k] == opponentColor)//相手の色のとき
-                {
-                    rowList[y + k][x - k] = playerColor;
-                }
-                else if (rowList[y + k][x - k] == playerColor)//自分の色のとき抜ける
-                {
-                    return;
-                }
-                k++;
-            }
-        }
-        #endregion
-
-        private Image GetSorce(string aaa)
-        {
-            switch (aaa)
-            {
+                //Dictionary にしようとしたがbtn〇〇が動的なため使えないと言われた
                 case "11":
                     return btn11;
                 case "12":
@@ -699,37 +190,117 @@ namespace オセロ
             }
         }
 
-        //相手の色がないとき、ゲーム終了処理を行う
-        private void CheckOpponentColorExist()
+        //マスのボタンを押したときの処理
+        private void buttonSquare_Click(object sender, RoutedEventArgs e)
         {
-            int playerColor = 0;
-            int opponentColor = 0;
-            GetPutStoneColoer(out playerColor, out opponentColor);
-            if (0 == GetNumOfStorn(opponentColor))
+            Button srcButton = (Button)e.Source;
+            Image square = (Image)srcButton.Content;
+
+            string btnName = srcButton.Name;
+            int boardCoordinates = int.Parse(btnName.Replace("button", ""));
+
+            int y = (boardCoordinates / 10) % 10;//boardCoordinatesの１０の位の数 = 縦のマス数
+            int x = boardCoordinates % 10;//boardCoordinatesの１の位の数 = 横のマス数
+
+            bool right = false;
+            bool left = false;
+            bool up = false;
+            bool down = false;
+            bool rightUp = false;
+            bool leftUp = false;
+            bool rightDown = false;
+            bool leftDown = false;
+
+            //自分の石を置けるかどうかのチェック
+            if (ReverseCheck.CheckTurnUpsideDown(y, x, boadList, ref right, ref left, ref up, ref down, ref rightUp, ref leftUp, ref rightDown, ref leftDown))
             {
-                GameEnd();
+                //盤の情報を変更する
+                Reverse.ReverseStorns(y, x, boadList, right, left, up, down, rightUp, leftUp, rightDown, leftDown);
+                //盤面を画面に反映する
+                ReflectOnBoard();
+
+                //相手の色がないとき、ゲーム終了処理を行う
+                CheckOpponentColorExist();
+                //緑のマスがないとき、ゲーム終了処理を行う
+                CheckNoneColorExist();
+                //ターンプレイヤーを交代する(相手のターンになる)
+                ChangeTarn();
+                //相手が置ける場所がないとき、パスする(次を自分のターンにする)
+                if (!CheckCanPutStones())
+                {
+                    MessageBox.Show("置ける場所がありません。パスします。");
+                    ChangeTarn();
+                    //自分も置ける場所がないとき、ゲームを終了する
+                    if (!CheckCanPutStones())
+                    {
+                        MessageBox.Show("両者置ける場所がありません。ゲーム終了です。");
+                        GameEnd();
+                    }
+                }
             }
         }
 
-        //緑のマスがないとき、ゲーム終了処理を行う
-        private void CheckNoneColorExist()
+        //最後に盤面を画面に反映する
+        private void ReflectOnBoard()
         {
-            if (0 == GetNumOfStorn(1))
+            for (int row = 0; row <= 9; row++)
             {
-                GameEnd();
+                int[] rowList = boadList[row];
+                for (int line = 0; line <= 9; line++)
+                {
+                    string rowstr = row.ToString();
+                    string linestr = line.ToString();
+                    string strCoodinate = rowstr + linestr;
+                    Image sorce = GetSorce(strCoodinate);
+                    if (rowList[line] == 1)
+                    {
+                        sorce.Source = IMG_GREEN;
+                    }
+                    if (rowList[line] == 2)
+                    {
+                        sorce.Source = IMG_WHITE;
+                    }
+                    if (rowList[line] == 3)
+                    {
+                        sorce.Source = IMG_BLACK;
+                    }
+                }
+            }
+            UpdateNumOfStorns();
+        }
+        
+        //石の数を更新する
+        private void UpdateNumOfStorns()
+        {
+            whiteNum = Info.GetNumOfStorn(boadList, 2);
+            blackNum = Info.GetNumOfStorn(boadList, 3);
+            textBlockBlack.Text = "黒：" + blackNum;
+            textBlockWhite.Text = "白：" + whiteNum;
+        }
+
+        //プレイヤーを交代する
+        private void ChangeTarn()
+        {
+            if (firstPlayerTarn)
+            {
+                firstPlayerTarn = false;
+            }
+            else
+            {
+                firstPlayerTarn = true;
             }
         }
 
-        //自分が置ける場所がないとき、パスする
+        //自分が置ける場所がないかどうかを確認する
         private bool CheckCanPutStones()
         {
-            for (int i = 1; i <= 8; i++)
+            for (int y = 1; y <= 8; y++)
             {
-                for (int j = 1; j <= 8; j++)
+                for (int x = 1; x <= 8; x++)
                 {
-                    if (rowList[i][j] == 1)//TODO: 統合
+                    if (boadList[y][x] == 1)//TODO: 統合
                     {
-                        if (CheckTurnUpsideDown(i, j))
+                        if (ReverseCheck.CheckTurnUpsideDown(y, x, boadList))
                         {
                             return true;
                         }
@@ -739,31 +310,22 @@ namespace オセロ
             return false;
         }
 
-        //指定した色のマスを取得する
-        private int GetNumOfStorn(int color)
+        //相手の色がないとき、ゲーム終了処理を行う
+        private void CheckOpponentColorExist()
         {
-            int count = 0;
-
-            for (int i = 1; i <= 8; i++)
+            if (0 == Info.GetNumOfStorn(boadList, Info.GetOpponentColoer()))
             {
-                for (int j = 1; j <= 8; j++)
-                {
-                    if (rowList[i][j] == color)
-                    {
-                        count++;
-                    }
-                }
+                GameEnd();
             }
-            return count;
         }
-    
-        //石の数を更新する
-        private void UpdateNumOfStorns()
+
+        //緑のマスがないとき、ゲーム終了処理を行う
+        private void CheckNoneColorExist()
         {
-            blackNum = GetNumOfStorn(2);
-            whiteNum = GetNumOfStorn(3);
-            textBlockBlack.Text = "黒："+ blackNum;
-            textBlockWhite.Text = "白：" + whiteNum;
+            if (0 == Info.GetNumOfStorn(boadList, 1))
+            {
+                GameEnd();
+            }
         }
 
         //ゲーム終了処理　石の数を比べて勝敗を判定する
@@ -777,7 +339,7 @@ namespace オセロ
             {
                 MessageBox.Show("白プレイヤーの勝利です");
             }
-            if (whiteNum == blackNum)
+            else if (whiteNum == blackNum)
             {
                 MessageBox.Show("引き分けです");
             }
